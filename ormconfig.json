@@ -1,9 +1,9 @@
 {
   "type": "postgres",
-  "host": "127.0.0.1",
-  "port": 5432,
+  "host": "localhost",
+  "port": 5444,
   "username": "postgres",
-  "password": "leandro4565",
+  "password": "docker",
   "database": "gosocial",
   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],

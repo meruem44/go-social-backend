@@ -11,6 +11,9 @@ import { PostRepository } from "@modules/Posts/infra/typeorm/repositories/PostRe
 import { IContactRepository } from "@modules/Contacts/repositories/IContactsRepository";
 import { ContactsRepository } from "@modules/Contacts/infra/typeorm/repositories/ContactsRepository";
 
+import { ICommentRepository } from "@modules/Comments/repositories/ICommentRepository";
+import { CommentsRepository } from "@modules/Comments/infra/typeorm/repositories/CommentsRepository";
+
 container.registerSingleton<IUserRepository>(
   "UsersRepository",
   UsersRepository
@@ -21,4 +24,9 @@ container.registerSingleton<IPostRepository>("PostRepository", PostRepository);
 container.registerSingleton<IContactRepository>(
   "ContactsRepository",
   ContactsRepository
+);
+
+container.registerSingleton<ICommentRepository>(
+  "CommentsRepository",
+  CommentsRepository
 );

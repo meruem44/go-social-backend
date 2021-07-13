@@ -10,6 +10,6 @@ postRouter.use(ensureAuthenticate);
 
 postRouter.post("/", postsController.create);
 postRouter.get("/", postsController.index);
-postRouter.get("/user/:id", postsController.show);
+postRouter.get("/:id", postsController.show);
 
 export { postRouter };
