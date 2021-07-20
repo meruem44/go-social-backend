@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
+import { IListPostDTO } from "../dtos/IListPostDTO";
 
-import { Post } from "../infra/typeorm/entities/Post";
 import { IPostRepository } from "../repositories/IPostRepository";
 
 @injectable()
@@ -10,7 +10,7 @@ class ListAllPostService {
     private postsRepository: IPostRepository
   ) {}
 
-  public async execute(): Promise<Post[]> {
+  public async execute(): Promise<IListPostDTO[]> {
     const posts = await this.postsRepository.list();
 
     return posts;

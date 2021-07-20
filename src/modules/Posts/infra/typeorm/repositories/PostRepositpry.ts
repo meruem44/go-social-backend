@@ -3,6 +3,7 @@ import { getRepository, Repository } from "typeorm";
 import { IPostRepository } from "@modules/Posts/repositories/IPostRepository";
 import { Post } from "../entities/Post";
 import { ICreatePostDTO } from "@modules/Posts/dtos/ICreatePostDTO";
+import { IListPostDTO } from "@modules/Posts/dtos/IListPostDTO";
 
 class PostRepository implements IPostRepository {
   private ormRepository: Repository<Post>;
@@ -11,8 +12,24 @@ class PostRepository implements IPostRepository {
     this.ormRepository = getRepository(Post);
   }
 
-  public async list(): Promise<Post[]> {
-    const posts = await this.ormRepository.find();
+  public async list(): Promise<IListPostDTO[]> {
+    const posts: IListPostDTO[] = [];
+
+    const postsQuerry = await this.ormRepository
+      .createQueryBuilder("posts")
+      .innerJoinAndSelect("posts.user", "users")
+      .orderBy("posts.created_at", "DESC")
+      .getMany();
+
+    for await (let i of postsQuerry) {
+      posts.push({
+        ...i,
+        user: i.user.name,
+        avatar: i.user.avatar,
+      });
+    }
+
+    console.log(posts);
 
     return posts;
   }
